@@ -1,13 +1,13 @@
 {
-  "originHash" : "7d66b719f8a111055bea51fec42264d7ec055171584f1f4c60ace65c5e5d2868",
+  "originHash" : "58acd39ca7bfd4b7130b3187998a946e8a391b54edad0f16516479ec5e861930",
   "pins" : [
     {
       "identity" : "ch3",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/bdotdub/Ch3",
       "state" : {
-        "branch" : "main",
-        "revision" : "6d415f19c29a92f24654a07744642e7992965711"
+        "revision" : "c9bb49bc6801e745f0c7ac135855cda09dbb4536",
+        "version" : "3.6.0"
       }
     },
     {

@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8490BAC82DD6FF5A00EA2D05 /* SwiftH3 in Frameworks */ = {isa = PBXBuildFile; productRef = 8490BAC72DD6FF5A00EA2D05 /* SwiftH3 */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		845F948C2DD6F60000EB715A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8490BAC82DD6FF5A00EA2D05 /* SwiftH3 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = "My World";
 			packageProductDependencies = (
+				8490BAC72DD6FF5A00EA2D05 /* SwiftH3 */,
 			);
 			productName = "My World";
 			productReference = 845F947C2DD6F5FF00EB715A /* My World.app */;
@@ -196,8 +202,7 @@
 			mainGroup = 845F94732DD6F5FF00EB715A;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				845F94B22DD6F72A00EB715A /* XCRemoteSwiftPackageReference "SwiftH3" */,
-				8460C8312DD6F99000B33ED5 /* XCRemoteSwiftPackageReference "Ch3" */,
+				8490BAC62DD6FF5A00EA2D05 /* XCRemoteSwiftPackageReference "SwiftH3" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 845F947D2DD6F5FF00EB715A /* Products */;
@@ -408,6 +413,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location always to be able to automatically keep track of the places you have visited.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to keep track of the places you visit";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to keep track of the places you visit";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -440,6 +446,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location always to be able to automatically keep track of the places you have visited.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to keep track of the places you visit";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to keep track of the places you visit";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -572,7 +579,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		845F94B22DD6F72A00EB715A /* XCRemoteSwiftPackageReference "SwiftH3" */ = {
+		8490BAC62DD6FF5A00EA2D05 /* XCRemoteSwiftPackageReference "SwiftH3" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bdotdub/SwiftH3";
 			requirement = {
@@ -580,15 +587,15 @@
 				kind = branch;
 			};
 		};
-		8460C8312DD6F99000B33ED5 /* XCRemoteSwiftPackageReference "Ch3" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/bdotdub/Ch3";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8490BAC72DD6FF5A00EA2D05 /* SwiftH3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8490BAC62DD6FF5A00EA2D05 /* XCRemoteSwiftPackageReference "SwiftH3" */;
+			productName = SwiftH3;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 845F94742DD6F5FF00EB715A /* Project object */;
 }
