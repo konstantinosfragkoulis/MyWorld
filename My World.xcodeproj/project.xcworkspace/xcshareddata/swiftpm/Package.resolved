@@ -1,0 +1,24 @@
+{
+  "originHash" : "7d66b719f8a111055bea51fec42264d7ec055171584f1f4c60ace65c5e5d2868",
+  "pins" : [
+    {
+      "identity" : "ch3",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bdotdub/Ch3",
+      "state" : {
+        "branch" : "main",
+        "revision" : "6d415f19c29a92f24654a07744642e7992965711"
+      }
+    },
+    {
+      "identity" : "swifth3",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bdotdub/SwiftH3",
+      "state" : {
+        "branch" : "master",
+        "revision" : "0936ec8baf6edcd776ed3f13e7f483b389bb7b3a"
+      }
+    }
+  ],
+  "version" : 3
+}

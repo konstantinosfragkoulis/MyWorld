@@ -7,55 +7,61 @@
 
 import SwiftUI
 import SwiftData
+import MapKit
+import SwiftH3
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    @EnvironmentObject private var locationManager: LocationManager
+    @Query private var items: [LocationRecord]
+    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+        VStack(spacing: 16) {
+            Map(position: $position) {
+                UserAnnotation()
+                
+                ForEach(polygons(records: items)) { polygon in
+                    MapPolygon(coordinates: polygon.coordinates)
+                        .stroke(Color.blue, lineWidth: 2)
+                        .foregroundStyle(Color.blue.opacity(0.2))
+                        //.fill(Color.blue.opacity(0.2))
                 }
             }
-        } detail: {
-            Text("Select an item")
+            .frame(height: 400)
+            .mapControls {
+                MapUserLocationButton()
+                MapPitchToggle()
+            }
+            
+            Text("Stored Locations:")
+                .font(.headline)
+            
+            List(items) { record in
+                VStack(alignment: .leading) {
+                    Text(String(format: "Lat: %.5f, Lon: %.5f", record.latitude, record.longitude))
+                    Text(record.timestamp, style: .date)
+                    Text(record.timestamp, style: .time)
+                }
+            }
         }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
+        .padding()
+        .onAppear {
+            locationManager.startUpdatingLocation()
         }
     }
 }
 
 #Preview {
+    let schema = Schema([LocationRecord.self])
+    let previewContainer = try! ModelContainer(
+        for: schema,
+        configurations: [ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)]
+    )
+    
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(previewContainer)
+        .environmentObject(
+            LocationManager(context: previewContainer.mainContext)
+        )
 }

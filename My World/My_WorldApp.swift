@@ -10,22 +10,39 @@ import SwiftData
 
 @main
 struct My_WorldApp: App {
+    @StateObject private var locationManager: LocationManager
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            LocationRecord.self,
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        let config = ModelConfiguration(
+            schema: schema,
+            isStoredInMemoryOnly: false
+        )
 
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            return try ModelContainer(
+                for: schema,
+                configurations: [config]
+            )
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+    
+    init() {
+        let container = sharedModelContainer
+        _locationManager = StateObject(wrappedValue:
+            LocationManager(context: container.mainContext)
+        )
+    }
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(locationManager)
+                .onAppear { locationManager.startUpdatingLocation() }
         }
         .modelContainer(sharedModelContainer)
     }

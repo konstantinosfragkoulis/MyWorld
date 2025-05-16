@@ -195,6 +195,10 @@
 			);
 			mainGroup = 845F94732DD6F5FF00EB715A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				845F94B22DD6F72A00EB715A /* XCRemoteSwiftPackageReference "SwiftH3" */,
+				8460C8312DD6F99000B33ED5 /* XCRemoteSwiftPackageReference "Ch3" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 845F947D2DD6F5FF00EB715A /* Products */;
 			projectDirPath = "";
@@ -400,6 +404,10 @@
 				DEVELOPMENT_TEAM = R5GHLXXXT9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "My-World-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location always to be able to automatically keep track of the places you have visited.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to keep track of the places you visit";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +436,10 @@
 				DEVELOPMENT_TEAM = R5GHLXXXT9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "My-World-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location always to be able to automatically keep track of the places you have visited.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to keep track of the places you visit";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -558,6 +570,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		845F94B22DD6F72A00EB715A /* XCRemoteSwiftPackageReference "SwiftH3" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bdotdub/SwiftH3";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		8460C8312DD6F99000B33ED5 /* XCRemoteSwiftPackageReference "Ch3" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bdotdub/Ch3";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 845F94742DD6F5FF00EB715A /* Project object */;
 }
