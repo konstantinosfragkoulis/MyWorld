@@ -15,6 +15,7 @@ struct My_WorldApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             LocationRecord.self,
+            HexRecord.self
         ])
         let config = ModelConfiguration(
             schema: schema,

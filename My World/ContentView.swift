@@ -14,6 +14,7 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var locationManager: LocationManager
     @Query private var items: [LocationRecord]
+    @Query private var hexagons: [HexRecord]
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
     
     var body: some View {
@@ -21,31 +22,18 @@ struct ContentView: View {
             Map(position: $position) {
                 UserAnnotation()
                 
-                ForEach(polygons(records: items)) { polygon in
+                ForEach(polygons(hexagons: hexagons)) { polygon in
                     MapPolygon(coordinates: polygon.coordinates)
                         .stroke(Color.blue, lineWidth: 2)
                         .foregroundStyle(Color.blue.opacity(0.2))
-                        //.fill(Color.blue.opacity(0.2))
                 }
             }
-            .frame(height: 400)
             .mapControls {
                 MapUserLocationButton()
                 MapPitchToggle()
-            }
-            
-            Text("Stored Locations:")
-                .font(.headline)
-            
-            List(items) { record in
-                VStack(alignment: .leading) {
-                    Text(String(format: "Lat: %.5f, Lon: %.5f", record.latitude, record.longitude))
-                    Text(record.timestamp, style: .date)
-                    Text(record.timestamp, style: .time)
-                }
+                MapCompass()
             }
         }
-        .padding()
         .onAppear {
             locationManager.startUpdatingLocation()
         }
@@ -53,7 +41,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    let schema = Schema([LocationRecord.self])
+    let schema = Schema([LocationRecord.self, HexRecord.self])
     let previewContainer = try! ModelContainer(
         for: schema,
         configurations: [ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)]

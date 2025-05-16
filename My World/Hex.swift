@@ -10,6 +10,7 @@ import MapKit
 import Ch3
 import SwiftH3
 import CoreLocation
+import SwiftData
 
 func radToDeg(x: Double) -> Double {
     return x * 180.0 / .pi
@@ -32,24 +33,20 @@ func convertToCLCoordinates(_ boundary: GeoBoundary) -> [CLLocationCoordinate2D]
 }
 
 func polygons(
-    records: [LocationRecord],
+    hexagons: [HexRecord],
     resolution: Int32 = 8
 ) -> [HexPolygon] {
-    let cells = records.map {
-        H3Index(coordinate: H3Coordinate(lat: $0.latitude, lon: $0.longitude), resolution: resolution)
-    }
-    for cell in cells {
-        print(cell.description)
-    }
-    let unique = Set(cells)
+    print("CALLED FUNCTION POLYGONS!!!")
     
-    return unique.compactMap { cell in
-        guard let hexNum = UInt64(cell.description, radix: 16) else { fatalError("Invalid H3 Index Hex") }
+    return hexagons.compactMap { hex in
+        // guard let hexNum = UInt64(cell.description, radix: 16) else { fatalError("Invalid H3 Index Hex") }
         var boundary = GeoBoundary()
-        h3ToGeoBoundary(hexNum, &boundary)
+        h3ToGeoBoundary(hex.name, &boundary)
+        print("\n")
         print(boundary)
         print(convertToCLCoordinates(boundary))
-        return HexPolygon(id: hexNum, coordinates: convertToCLCoordinates(boundary))
+        print("\n")
+        return HexPolygon(id: hex.name, coordinates: convertToCLCoordinates(boundary))
     }
     
 }

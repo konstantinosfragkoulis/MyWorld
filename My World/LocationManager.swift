@@ -8,6 +8,8 @@
 import Foundation
 import CoreLocation
 import SwiftData
+import SwiftH3
+import Ch3
 
 final class LocationManager: NSObject, ObservableObject {
     @Published var authorizationStatus: CLAuthorizationStatus
@@ -76,37 +78,29 @@ extension LocationManager: CLLocationManagerDelegate {
         guard let loc = locations.last else { return }
         let coord = loc.coordinate
         
-        let epsilon = coordinateEpsilon
         let targetLat = coord.latitude
         let targetLon = coord.longitude
-
-        let predicate = #Predicate<LocationRecord> {
-            // latitude within [targetLat - ε, targetLat + ε]
-            $0.latitude >= targetLat - epsilon &&
-            $0.latitude <= targetLat + epsilon &&
-
-            // longitude within [targetLon - ε, targetLon + ε]
-            $0.longitude >= targetLon - epsilon &&
-            $0.longitude <= targetLon + epsilon
-        }
         
-        // fetch any matching records
-        let existing: [LocationRecord]
+        // Get the hexagon that the user is currently in as a UInt64
+        guard let curHex = UInt64(H3Index(coordinate: H3Coordinate(lat: targetLat, lon: targetLon), resolution: 8).description, radix: 16) else { return }
+
+        // If the current hexagon is not already stored in SwiftData as a HexRecord, save it
+        var descriptor = FetchDescriptor<HexRecord>(
+            predicate: #Predicate { $0.name == curHex },
+        )
+        descriptor.fetchLimit = 1
+        var existing: [HexRecord]
         do {
-            existing = try context.fetch(FetchDescriptor(predicate: predicate))
+            existing = try context.fetch(descriptor)
         }
         catch {
-            print("Error fetching existing locations: \(error)")
+            print("Error fetching existing hexagons: \(error)")
             existing = []
         }
         
-        // only save if there is no duplicate
         if existing.isEmpty {
-            let record = LocationRecord(
-                latitude: targetLat,
-                longitude: targetLon,
-                timestamp: loc.timestamp
-            )
+            let record = HexRecord(name: curHex)
+            print("New Hex Record: \(curHex)!!!")
             context.insert(record)
         }
     }
