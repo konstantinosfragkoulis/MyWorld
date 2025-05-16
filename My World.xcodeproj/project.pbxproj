@@ -31,6 +31,7 @@
 		845F947C2DD6F5FF00EB715A /* My World.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My World.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		845F948B2DD6F60000EB715A /* My WorldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "My WorldTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		845F94952DD6F60000EB715A /* My WorldUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "My WorldUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8490BAC92DD702E500EA2D05 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -84,6 +85,7 @@
 				845F948E2DD6F60000EB715A /* My WorldTests */,
 				845F94982DD6F60000EB715A /* My WorldUITests */,
 				845F947D2DD6F5FF00EB715A /* Products */,
+				8490BAC92DD702E500EA2D05 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
