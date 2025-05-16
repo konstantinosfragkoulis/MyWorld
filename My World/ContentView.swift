@@ -13,7 +13,6 @@ import SwiftH3
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var locationManager: LocationManager
-    @Query private var items: [LocationRecord]
     @Query private var hexagons: [HexRecord]
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
     
@@ -41,7 +40,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    let schema = Schema([LocationRecord.self, HexRecord.self])
+    let schema = Schema([HexRecord.self])
     let previewContainer = try! ModelContainer(
         for: schema,
         configurations: [ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)]
