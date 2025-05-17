@@ -15,13 +15,21 @@ struct ContentView: View {
     @EnvironmentObject private var locationManager: LocationManager
     @Query private var hexagons: [HexRecord]
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+    @State private var cachedHexagons: [HexRecord] = []
+    @State private var cachedPolygons: [HexPolygon] = []
+    
+    func updatePolygons(newHexagons: [HexRecord]) {
+        guard newHexagons.count != cachedHexagons.count else { return }
+        cachedHexagons = newHexagons
+        cachedPolygons = polygons(hexagons: newHexagons)
+    }
     
     var body: some View {
         VStack(spacing: 16) {
             Map(position: $position) {
                 UserAnnotation()
                 
-                ForEach(polygons(hexagons: hexagons)) { polygon in
+                ForEach(cachedPolygons) { polygon in
                     MapPolygon(coordinates: polygon.coordinates)
                         .stroke(Color.blue, lineWidth: 2)
                         .foregroundStyle(Color.blue.opacity(0.2))
@@ -32,9 +40,13 @@ struct ContentView: View {
                 MapPitchToggle()
                 MapCompass()
             }
-        }
-        .onAppear {
-            locationManager.startUpdatingLocation()
+            .onChange(of: hexagons) {
+                updatePolygons(newHexagons: hexagons)
+            }
+            .onAppear {
+                locationManager.startUpdatingLocation()
+                updatePolygons(newHexagons: hexagons)
+            }
         }
     }
 }

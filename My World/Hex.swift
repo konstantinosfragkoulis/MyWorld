@@ -36,16 +36,9 @@ func polygons(
     hexagons: [HexRecord],
     resolution: Int32 = 8
 ) -> [HexPolygon] {
-    print("CALLED FUNCTION POLYGONS!!!")
-    
     return hexagons.compactMap { hex in
-        // guard let hexNum = UInt64(cell.description, radix: 16) else { fatalError("Invalid H3 Index Hex") }
         var boundary = GeoBoundary()
         h3ToGeoBoundary(hex.name, &boundary)
-        print("\n")
-        print(boundary)
-        print(convertToCLCoordinates(boundary))
-        print("\n")
         return HexPolygon(id: hex.name, coordinates: convertToCLCoordinates(boundary))
     }
     
