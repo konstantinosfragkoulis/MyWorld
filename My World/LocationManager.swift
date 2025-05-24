@@ -17,9 +17,8 @@ final class LocationManager: NSObject, ObservableObject {
     private let manager = CLLocationManager()
     private let context: ModelContext
     
-    private let distanceFilter: CLLocationDistance = 100       // meters
+    private let distanceFilter: CLLocationDistance = 100
     private let desiredAccuracy = kCLLocationAccuracyKilometer
-    private let coordinateEpsilon = 0.001                       // ~100 m tolerance
     
     init(context: ModelContext) {
         self.context = context
