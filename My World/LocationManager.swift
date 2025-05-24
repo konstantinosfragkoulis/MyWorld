@@ -17,8 +17,7 @@ final class LocationManager: NSObject, ObservableObject {
     private let manager = CLLocationManager()
     private let context: ModelContext
     
-    private let distanceFilter: CLLocationDistance = 100
-    private let desiredAccuracy = kCLLocationAccuracyKilometer
+    private let desiredAccuracy = kCLLocationAccuracyHundredMeters
     
     init(context: ModelContext) {
         self.context = context
@@ -27,7 +26,6 @@ final class LocationManager: NSObject, ObservableObject {
         
         manager.delegate = self
         
-        manager.distanceFilter = distanceFilter
         manager.desiredAccuracy = desiredAccuracy
         
         manager.allowsBackgroundLocationUpdates = true
