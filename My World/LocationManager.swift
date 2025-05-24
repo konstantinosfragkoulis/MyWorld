@@ -27,23 +27,18 @@ final class LocationManager: NSObject, ObservableObject {
         manager.delegate = self
         
         manager.desiredAccuracy = desiredAccuracy
-        
         manager.allowsBackgroundLocationUpdates = true
         manager.pausesLocationUpdatesAutomatically = false
         
-        // Ask for When In Use first
         manager.requestWhenInUseAuthorization()
     }
     
     func startUpdatingLocation() {
         switch authorizationStatus {
         case .authorizedAlways:
-            // start both services
             manager.startUpdatingLocation()
-            manager.startMonitoringSignificantLocationChanges()
             
         case .authorizedWhenInUse:
-            // bump up to always
             manager.requestAlwaysAuthorization()
             
         default:
@@ -53,7 +48,6 @@ final class LocationManager: NSObject, ObservableObject {
     
     func stopUpdatingLocation() {
         manager.stopUpdatingLocation()
-        manager.stopMonitoringSignificantLocationChanges()
     }
 }
 
@@ -64,7 +58,6 @@ extension LocationManager: CLLocationManagerDelegate {
         if authorizationStatus == .authorizedAlways {
             startUpdatingLocation()
         } else if authorizationStatus == .authorizedWhenInUse {
-            // ask for Always
             manager.requestAlwaysAuthorization()
         }
         
