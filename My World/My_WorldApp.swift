@@ -11,6 +11,7 @@ import SwiftData
 @main
 struct My_WorldApp: App {
     @StateObject private var locationManager: LocationManager
+    @StateObject private var settings = AppSettings()
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -42,7 +43,10 @@ struct My_WorldApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(locationManager)
-                .onAppear { locationManager.startUpdatingLocation() }
+                .environmentObject(settings)
+                .onAppear {
+                    locationManager.startUpdatingLocation()
+                }
         }
         .modelContainer(sharedModelContainer)
     }
