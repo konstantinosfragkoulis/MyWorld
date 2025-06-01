@@ -8,3 +8,5 @@
 - 🛰️ Displays visited areas as hexagons using Uber’s H3 geospatial indexing system.
 - 📍 Live map view with real-time user location.
 - 🔵 Clean UI built with SwiftUI and MapKit.
+- 🎨 Customize the appearance of hexagons.
+- 📤 Import and export your location data for backup.
